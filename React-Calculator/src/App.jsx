@@ -2,40 +2,40 @@ import { useState } from "react";
 import './App.css'
 
 function Calculator() {
-  const [display, setDisplay] = useState("");
+  const [state, setState] = useState("");
 
-  let displayVal = "";
+  let numbval = "";
 
   const handleClick = (event) => {
     let value = event.target.value;
-    displayVal = display + value;
+    numbval = state + value;
 
     let operators = "+-/*.";
 
-    for (let i = 0; i < displayVal.length; i++) {
+    for (let i = 0; i < numbval.length; i++) {
       if (
-        operators.includes(displayVal[i]) &&
-        operators.includes(displayVal[i + 1])
+        operators.includes(numbval[i]) &&
+        operators.includes(numbval[i + 1])
       ) {
-        displayVal = displayVal.slice(0, -1);
+        numbval = numbval.slice(0, -1);
       }
     }
-    setDisplay(displayVal);
+    setState(numbval);
   };
 
   const handleDelete = () => {
-    let updatedDisplay = display.slice(0, -1);
-    setDisplay(updatedDisplay);
+    let delbutton = state.slice(0, -1);
+    setState(delbutton);
   };
 
   const calculateResult = () => {
-    let result = eval(display).toString();
-    setDisplay(result);
+    let result = eval(state);
+    setState(result);
   };
 
   return (
     <div className="wrapper">
-      <div className="display">{display}</div>
+      <div className="state">{state}</div>
       <div className="buttons">
         
         <button className="number" value="0" onClick={handleClick}>
@@ -84,7 +84,7 @@ function Calculator() {
         <button className="equals" value="=" onClick={calculateResult}>
           =
         </button>
-        <button className="button" value="ac" onClick={() => setDisplay("")}>
+        <button className="button" value="ac" onClick={() => setState("")}>
           AC
         </button>
         <button className="button" value="del" onClick={handleDelete}>
